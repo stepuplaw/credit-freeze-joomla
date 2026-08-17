@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" method="upgrade">
+	<name>PLG_CONTENT_CREDITFREEZE</name>
+	<author>Klagge Law, PLLC</author>
+	<authorEmail>office@stepuplaw.com</authorEmail>
+	<authorUrl>https://stepuplaw.com</authorUrl>
+	<creationDate>2026-08</creationDate>
+	<copyright>Copyright (C) 2026 Klagge Law, PLLC</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.0.0</version>
+	<description>PLG_CONTENT_CREDITFREEZE_XML_DESCRIPTION</description>
+
+	<files>
+		<filename plugin="creditfreeze">creditfreeze.php</filename>
+		<folder>language</folder>
+	</files>
+
+	<media destination="plg_content_creditfreeze" folder="media">
+		<folder>js</folder>
+	</media>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/plg_content_creditfreeze.ini</language>
+		<language tag="en-GB">en-GB/plg_content_creditfreeze.sys.ini</language>
+	</languages>
+
+	<updateservers>
+		<server type="extension" priority="1" name="Credit Freeze Letters for Joomla">https://stepuplaw.com/updates/creditfreeze.xml</server>
+	</updateservers>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="showcredit"
+					type="radio"
+					layout="joomla.form.field.radio.switcher"
+					label="PLG_CONTENT_CREDITFREEZE_SHOWCREDIT_LABEL"
+					description="PLG_CONTENT_CREDITFREEZE_SHOWCREDIT_DESC"
+					default="1"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					name="brand"
+					type="color"
+					label="PLG_CONTENT_CREDITFREEZE_BRAND_LABEL"
+					description="PLG_CONTENT_CREDITFREEZE_BRAND_DESC"
+					format="hex"
+					default=""
+				/>
+				<field
+					name="text"
+					type="color"
+					label="PLG_CONTENT_CREDITFREEZE_TEXT_LABEL"
+					format="hex"
+					default=""
+				/>
+				<field
+					name="muted"
+					type="color"
+					label="PLG_CONTENT_CREDITFREEZE_MUTED_LABEL"
+					format="hex"
+					default=""
+				/>
+				<field
+					name="line"
+					type="color"
+					label="PLG_CONTENT_CREDITFREEZE_LINE_LABEL"
+					format="hex"
+					default=""
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
