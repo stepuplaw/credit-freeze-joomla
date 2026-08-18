@@ -25,7 +25,7 @@
 	</languages>
 
 	<updateservers>
-		<server type="extension" priority="1" name="Credit Freeze Letters for Joomla">https://stepuplaw.com/updates/creditfreeze.xml</server>
+		<server type="extension" priority="1" name="Credit Freeze Letters">https://stepuplaw.com/updates/creditfreeze.xml</server>
 	</updateservers>
 
 	<config>
