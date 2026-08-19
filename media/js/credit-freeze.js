@@ -134,11 +134,11 @@
        heavier one used for the outer frame and the tab strip, so an embedder
        can strengthen the outline without darkening every internal divider. */
     '.sufz{--sufz-fg:#14201A;--sufz-mut:#475569;--sufz-brand:#1F4D3A;--sufz-line:rgba(71,85,105,.22);',
-    '--sufz-edge:rgba(45,60,72,.62);',
+    '--sufz-edge:#334155;',
     'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
     'color:var(--sufz-fg);font-size:16px;line-height:1.55;max-width:640px;border:2px solid var(--sufz-edge);',
     'border-radius:14px;background:#fff;box-sizing:border-box;overflow:hidden;',
-    'box-shadow:0 1px 2px rgba(20,32,26,.07),0 8px 24px rgba(20,32,26,.09)}',
+    'box-shadow:0 1px 2px rgba(20,32,26,.10),0 10px 28px rgba(20,32,26,.13)}',
     '.sufz *,.sufz *:before,.sufz *:after{box-sizing:inherit}',
     /* Tabs read as tabs: a recessed strip, hard dividers between them, and the
        selected one lifted to the pane colour with a thick brand underline. */
