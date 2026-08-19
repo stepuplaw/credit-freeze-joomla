@@ -130,19 +130,34 @@
   }
 
   var CSS = [
+    /* --sufz-line is the hairline used inside the card. --sufz-edge is the
+       heavier one used for the outer frame and the tab strip, so an embedder
+       can strengthen the outline without darkening every internal divider. */
     '.sufz{--sufz-fg:#14201A;--sufz-mut:#475569;--sufz-brand:#1F4D3A;--sufz-line:rgba(71,85,105,.22);',
+    '--sufz-edge:rgba(45,60,72,.62);',
     'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
-    'color:var(--sufz-fg);font-size:16px;line-height:1.5;max-width:640px;border:1px solid var(--sufz-line);',
-    'border-radius:14px;background:#fff;box-sizing:border-box;overflow:hidden}',
+    'color:var(--sufz-fg);font-size:16px;line-height:1.55;max-width:640px;border:2px solid var(--sufz-edge);',
+    'border-radius:14px;background:#fff;box-sizing:border-box;overflow:hidden;',
+    'box-shadow:0 1px 2px rgba(20,32,26,.07),0 8px 24px rgba(20,32,26,.09)}',
     '.sufz *,.sufz *:before,.sufz *:after{box-sizing:inherit}',
-    '.sufz-top{display:flex;border-bottom:1px solid var(--sufz-line)}',
-    '.sufz-top button{flex:1;border:0;background:#F7F5EF;font:inherit;font-size:14.5px;font-weight:600;',
-    'color:var(--sufz-mut);padding:12px 10px;cursor:pointer;border-bottom:2px solid transparent}',
-    '.sufz-top button[aria-selected="true"]{background:#fff;color:var(--sufz-brand);border-bottom-color:var(--sufz-brand)}',
-    '.sufz-top button small{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:1px}',
+    /* Tabs read as tabs: a recessed strip, hard dividers between them, and the
+       selected one lifted to the pane colour with a thick brand underline. */
+    '.sufz-top{display:flex;border-bottom:2px solid var(--sufz-edge);background:#EDEAE0}',
+    '.sufz-top button{flex:1;border:0;border-right:1px solid var(--sufz-edge);background:transparent;',
+    'font:inherit;font-size:15px;font-weight:700;letter-spacing:.005em;',
+    'color:var(--sufz-mut);padding:13px 10px 10px;cursor:pointer;border-bottom:3px solid transparent;',
+    'transition:background .12s ease,color .12s ease}',
+    '.sufz-top button:last-child{border-right:0}',
+    '.sufz-top button:hover{background:rgba(255,255,255,.55);color:var(--sufz-fg)}',
+    '.sufz-top button:focus-visible{outline:2px solid var(--sufz-brand);outline-offset:-3px}',
+    '.sufz-top button[aria-selected="true"]{background:#fff;color:var(--sufz-brand);',
+    'border-bottom-color:var(--sufz-brand)}',
+    '.sufz-top button small{display:block;font-weight:500;font-size:12px;opacity:.9;margin-top:2px;',
+    'letter-spacing:0}',
     /* The stolen-funds tab has to be findable at a glance by someone reading at
        11pm who has hours, not days. */
-    '.sufz-top button.urgent{background:rgba(176,141,46,.14);color:#7A5E12}',
+    '.sufz-top button.urgent{background:rgba(176,141,46,.18);color:#6B520F}',
+    '.sufz-top button.urgent:hover{background:rgba(176,141,46,.26);color:#5A450C}',
     '.sufz-top button.urgent[aria-selected="true"]{background:#fff;color:#7A5E12;border-bottom-color:#B08D2E}',
     '.sufz-step{display:flex;gap:10px;padding:11px 0;border-top:1px solid var(--sufz-line)}',
     '.sufz-step:first-of-type{border-top:0}',
@@ -203,10 +218,20 @@
     '.sufz-letter{border:1px solid var(--sufz-line);border-radius:10px;padding:16px 18px;',
     'font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.6;max-height:300px;overflow:auto}',
     '.sufz-letter p{margin:.8em 0}.sufz-letter address{font-style:normal;margin:1em 0}',
-    '.sufz-foot{border-top:1px solid var(--sufz-line);background:#F7F5EF;padding:14px 20px;',
-    'font-size:12px;line-height:1.6;color:var(--sufz-mut)}',
+    '.sufz-foot{border-top:2px solid var(--sufz-edge);background:#F7F5EF;padding:14px 20px;',
+    'font-size:12px;line-height:1.65;color:var(--sufz-mut)}',
     '.sufz-foot a{color:var(--sufz-brand);font-weight:600}',
-    '.sufz-foot strong{color:var(--sufz-fg)}'
+    '.sufz-foot strong{color:var(--sufz-fg)}',
+    /* Three tabs will not sit side by side on a narrow phone without the labels
+       breaking mid-word, so stack the strip below 430px. */
+    '@media (max-width:430px){.sufz-top{flex-wrap:wrap}',
+    '.sufz-top button{flex:1 0 100%;border-right:0;border-bottom:1px solid var(--sufz-edge);',
+    'text-align:left;padding:11px 16px}',
+    '.sufz-top button:last-child{border-bottom:0}',
+    '.sufz-top button[aria-selected="true"]{border-bottom-color:var(--sufz-brand);border-bottom-width:3px}',
+    '.sufz-top button.urgent[aria-selected="true"]{border-bottom-color:#B08D2E}',
+    '.sufz-top button small{display:inline;margin-left:6px}',
+    '.sufz-pane{padding:16px 16px}}'
   ].join('');
 
   function injectCss() {
@@ -238,22 +263,22 @@
       '<div class="sufz-top" role="tablist" aria-label="Choose a protection">' +
       '<button type="button" role="tab" id="' + p + 'tabAlert" aria-selected="true">Fraud alert<small>5 minutes, one call</small></button>' +
       '<button type="button" role="tab" id="' + p + 'tabFreeze" aria-selected="false">Credit freeze<small>Stronger, three letters</small></button>' +
-      '<button type="button" role="tab" class="urgent" id="' + p + 'tabStolen" aria-selected="false">Stolen funds, act now<small>Money already gone</small></button>' +
+      '<button type="button" role="tab" class="urgent" id="' + p + 'tabStolen" aria-selected="false">Stolen funds<small>Act now, money is gone</small></button>' +
       '</div>' +
 
       /* Fraud alert pane */
       '<div class="sufz-pane" id="' + p + 'paneAlert">' +
       '<p class="sufz-h">Start here, it takes five minutes</p>' +
-      '<p class="sufz-sub">A fraud alert asks any lender pulling the credit report to verify the applicant really is who they say before opening an account.</p>' +
-      '<div class="sufz-key"><strong>One call covers all three bureaus.</strong> Contact any one of them and it is required to tell the other two. This is the opposite of a freeze, which is never passed along and takes three separate requests.</div>' +
+      '<p class="sufz-sub">A fraud alert tells every lender who pulls the credit report to stop and confirm the applicant is really you before opening anything in your name.</p>' +
+      '<div class="sufz-key"><strong>One call covers all three bureaus.</strong> Call any one of them and the law requires it to pass the alert to the other two. A freeze works the opposite way, because nobody passes it along and you have to ask all three yourself.</div>' +
       '<div class="sufz-call">' +
       ALERT_LINES.map(function (b) {
         return '<a href="tel:+1' + b.tel + '">' + esc(b.name) + '<span>' + esc(b.shown) + '</span></a>';
       }).join('') +
       '</div>' +
-      '<p class="sufz-sub">An alert lasts one year and renews, or seven years with an identity theft report. It is free and does not affect the credit score.</p>' +
-      '<div class="sufz-key"><strong>An alert warns, a freeze blocks.</strong> A lender can look past an alert and open the account anyway. It cannot get past a freeze, because it cannot pull the report at all. Place the alert now, then use the freeze tab, and leave both in place.</div>' +
-      '<p class="sufz-sub">Doing this for someone who can no longer manage their own accounts? A freeze is the tool federal law lets you place for them. Use the freeze tab.</p>' +
+      '<p class="sufz-sub">The alert is free, it never touches the credit score, and it runs for one year. You can renew it, or extend it to seven years once you have filed an identity theft report.</p>' +
+      '<div class="sufz-key"><strong>An alert warns, a freeze blocks.</strong> A lender is free to read the warning, shrug, and open the account anyway. No lender can do that with a freeze, because the report will not come out at all. Place the alert now while you have the phone in your hand, then move to the freeze tab and leave both running.</div>' +
+      '<p class="sufz-sub">If you are doing this for a parent or someone else who can no longer manage their own accounts, federal law lets you place a freeze for them. That route lives on the freeze tab.</p>' +
       '</div>' +
 
       /* Stolen funds pane */
@@ -340,11 +365,11 @@
 
       /* Disclaimer, travels with every embed */
       '<div class="sufz-foot">' +
-      '<strong>Not legal advice.</strong> This produces template correspondence from published law and from ' +
-      'procedures published by the credit bureaus. It is general information, it is not advice about your ' +
-      'situation, and using it creates no attorney-client relationship.<br>' +
-      '<strong>Contact details change.</strong> Bureau mailing addresses, phone numbers, and document ' +
-      'requirements are set by the bureaus and move without notice. Confirm them before you mail or call.<br>' +
+      '<strong>Not legal advice.</strong> This tool writes template letters from published federal law and ' +
+      'from the procedures each bureau publishes. That makes it general information rather than advice about ' +
+      'your situation, and using it creates no attorney-client relationship.<br>' +
+      '<strong>Contact details change.</strong> The bureaus set their own mailing addresses, phone numbers ' +
+      'and document requirements, and they move them without notice. Confirm yours before you mail or call.<br>' +
       'Addresses, enclosures and numbers last verified <strong>' + VERIFIED + '</strong>. ' +
       (showCredit
         ? 'Credit freeze letters by Klagge Law, PLLC. Full guide and the fraud hotline list at ' +
