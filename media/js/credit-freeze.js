@@ -1,6 +1,6 @@
 /*!
  * Fraud alert and credit freeze letters, embeddable widget
- * Klagge Law, PLLC  https://stepuplaw.com/credit-freeze-letter-generator
+ * Kevin D. Klagge, Esq.  https://stepuplaw.com/credit-freeze-letter-generator
  *
  * Drop this anywhere:
  *   <div data-stepup-freeze></div>
@@ -372,7 +372,7 @@
       'and document requirements, and they move them without notice. Confirm yours before you mail or call.<br>' +
       'Addresses, enclosures and numbers last verified <strong>' + VERIFIED + '</strong>. ' +
       (showCredit
-        ? 'Credit freeze letters by Klagge Law, PLLC. Full guide and the fraud hotline list at ' +
+        ? 'Credit freeze letters by Kevin D. Klagge, Esq. Full guide and the fraud hotline list at ' +
           '<a href="' + TOOL + '">stepuplaw.com</a>.'
         : '') +
       '</div>';

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="content" method="upgrade">
 	<name>PLG_CONTENT_CREDITFREEZE</name>
-	<author>Klagge Law, PLLC</author>
+	<author>Kevin D. Klagge, Esq.</author>
 	<authorEmail>office@stepuplaw.com</authorEmail>
 	<authorUrl>https://stepuplaw.com</authorUrl>
 	<creationDate>2026-08</creationDate>
 	<copyright>Copyright (C) 2026 Klagge Law, PLLC</copyright>
 	<license>GNU General Public License version 2 or later</license>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<description>PLG_CONTENT_CREDITFREEZE_XML_DESCRIPTION</description>
 
 	<files>
